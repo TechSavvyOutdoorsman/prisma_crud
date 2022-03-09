@@ -15,9 +15,10 @@ const Layout = ({ children }) => {
           <Head>
               <title>Prisma Crud App</title>
           </Head>  
-          <Box>
-            {children}
-          </Box>
+
+            <Box maxW='container.lg'>
+                {children}
+            </Box>
 
         </>
     )
