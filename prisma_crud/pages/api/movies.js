@@ -13,12 +13,14 @@ export default async(req, res) => {
 
 
 
-export default async(req, res) => {
-    const data = JSON.parse(req.body)
+// export default async(req, res) => {
+//     const data = JSON.parse(req.body)
 
-    const updatedMovie = await prisma.movie.update({
-        data
-    })
+//     const updatedMovie = await prisma.movie.update({
+//         data
+//     })
 
-    res.json(updatedMovie)
-}
+//     res.json(updatedMovie)
+// }
+
+

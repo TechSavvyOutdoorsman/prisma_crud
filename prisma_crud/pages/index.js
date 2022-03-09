@@ -17,6 +17,18 @@ export default function Home({ data }) {
 
   const [movies, setMovies ] = useState(data)
 
+
+  async function deleteMovie(e) {
+    e.preventDefault()
+
+      const response = await fetch('/api/deleteMovie', {
+        method: 'DELETE',
+        body: JSON.stringify()
+      })
+
+      return await response.json()
+  }
+
   return (
     <Layout>
       <Flex align='center' justify='center' flexDir='column'>
@@ -38,8 +50,8 @@ export default function Home({ data }) {
                     <Text as='p' fontSize='sm'>{item.description}</Text>
                   </Box>
                   <Flex gap={3} mt={2}>
-                    <Button variant='ghost' colorScheme='blue' as='a' href='' target="_self">Edit</Button>
-                    <Button variant='outline' colorScheme='red' as='a' href='' target="_self">Delete</Button>
+                    <Button variant='ghost' colorScheme='blue' as='a' href={`/${item.slug}/view`} target="_self">View</Button>
+                    <Button variant='outline' colorScheme='red' onClick={deleteMovie} target="_self">Delete</Button>
                   </Flex>
                 </Box>
               </li>
