@@ -46,10 +46,10 @@ const Create = () => {
                 <Heading mb={5} as='h1' fontSize='lg'>Create a New Movie</Heading>
                 <form onSubmit={saveMovie}>
                     <Flex gap={3} flexDir='column' w='100%'>
-                        <Input type='text' placeHolder='Title' name='title' onChange={e => setFormData({ ...formData, title: e.target.value})} />
-                        <Input type='textext' placeHolder='Year' name='year' onChange={e => setFormData({ ...formData, year: +e.target.value})} />
-                        <Textarea id='' cols='30' rows='10' placeHolder='Description' onChange={e => setFormData({ ...formData, description: e.target.value})} />
-                        <Input type='text' placeHolder='Slug' name='slug' onChange={e => setFormData({ ...formData, slug: e.target.value})} />
+                        <Input type='text' placeholder='Title' name='title' onChange={e => setFormData({ ...formData, title: e.target.value})} />
+                        <Input type='textext' placeholder='Year' name='year' onChange={e => setFormData({ ...formData, year: +e.target.value})} />
+                        <Textarea id='' cols='30' rows='10' placeholder='Description' onChange={e => setFormData({ ...formData, description: e.target.value})} />
+                        <Input type='text' placeholder='Slug' name='slug' onChange={e => setFormData({ ...formData, slug: e.target.value})} />
                         <Button type='submit' colorScheme='cyan'>Add movie</Button>
                         <Button variant='outline' as='a' href='/' colorScheme='teal'>Back</Button>
                     </Flex>

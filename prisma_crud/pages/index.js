@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { 
   Text, 
   Heading, 
@@ -16,17 +17,37 @@ import Layout from '../components/layouts/Main'
 export default function Home({ data }) {
 
   const [movies, setMovies ] = useState(data)
+  const router = useRouter()
+
+  const refreshData = () => {
+    router.replace(router.asPath)
+  }
 
 
-  async function deleteMovie(e) {
-    e.preventDefault()
+  async function deleteMovie(id) {
 
-      const response = await fetch('/api/deleteMovie', {
-        method: 'DELETE',
-        body: JSON.stringify()
+    try {
+      fetch(`/api/movie/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: 'DELETE'
+      }).then(() => {
+        router.reload()
       })
+    } catch (error) {
+      console.log(error)
+    }
 
-      return await response.json()
+
+    // e.preventDefault()
+
+    //   const response = await fetch('/api/deleteMovie', {
+    //     method: 'DELETE',
+    //     body: JSON.stringify()
+    //   })
+
+    //   return await response.json()
   }
 
   return (
@@ -51,7 +72,7 @@ export default function Home({ data }) {
                   </Box>
                   <Flex gap={3} mt={2}>
                     <Button variant='ghost' colorScheme='blue' as='a' href={`/${item.slug}/view`} target="_self">View</Button>
-                    <Button variant='outline' colorScheme='red' onClick={deleteMovie} target="_self">Delete</Button>
+                    <Button variant='outline' colorScheme='red' onClick={() => deleteMovie(item.id)} target="_self">Delete</Button>
                   </Flex>
                 </Box>
               </li>
