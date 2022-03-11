@@ -31,10 +31,8 @@ export default function Movie({ movie }) {
         const data = await response.json()
 
 
-        if (data !== '') {
-            return (
-                router.reload()
-                )
+        if (data != '') {
+            router.reload()
         } else {
             return null
         }
@@ -80,17 +78,17 @@ export default function Movie({ movie }) {
 }
 
 export async function getServerSideProps(context) {
-    const {id} = context.query
+    const {slug} = context.query
 
     const movie = await prisma.movie.findFirst({
         where: {
-            id: id
+            slug: slug
         }
     })
 
     return {
         props: {
             movie
-        }
+    }
     }
 }

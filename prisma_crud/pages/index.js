@@ -19,10 +19,6 @@ export default function Home({ data }) {
   const [movies, setMovies ] = useState(data)
   const router = useRouter()
 
-  const refreshData = () => {
-    router.replace(router.asPath)
-  }
-
 
   async function deleteMovie(id) {
 
@@ -33,6 +29,7 @@ export default function Home({ data }) {
         },
         method: 'DELETE'
       }).then(() => {
+
         router.reload()
       })
     } catch (error) {

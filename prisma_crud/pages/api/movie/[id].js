@@ -16,10 +16,9 @@ export default async function handler(req, res){
 		res.json(movie)
 	} else if (req.method === 'PUT') {
         const updatedMovie = await prisma.movie.update({
-            where: {
-                id: movieId
-            },
-                data: movieBody
+            where: 
+                { id: movieId },
+                data: movieBody 
         })
         res.json(updatedMovie)
 
