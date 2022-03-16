@@ -11,5 +11,7 @@ datasource db {
 }
 
 model Note {
-  id String 
+  id String @id @default(cuid())
+  title String
+  description String
 }
