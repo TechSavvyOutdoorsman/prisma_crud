@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import Layout from '../components/layout'
+import NoteForm from '../components/NoteForm'
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 import {
@@ -8,7 +10,7 @@ import {
   Text,
   Box,
   Flex,
-
+  useToast,
 } from '@chakra-ui/react'
 
 
@@ -16,18 +18,48 @@ import {
 
 export default function Home({ data }) {
   const [notes, setNotes] = useState(data)
+  const router = useRouter()
+  const toast = useToast()
+
 
   async function deleteNote(id) {
-    const response = await fetch('/api/notes', {
-      method: 'DELETE',
-      body: JSON.stringify()
-    })
-    if (!response.ok) {
-      console.log(response)
+    try {
+      fetch(`api/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "DELETE"
+      }).then(() => {
+        router.reload()
+      })
+    } catch (error) {
+      toast({
+        title: 'Note Deleted.',
+        description: `Error: ${error}`,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
     }
-    return await response.json()
   }
 
+
+  // async function readNote(id) {
+  //   try {
+  //     fetch(`api/${id}`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       method: "READ"
+  //     })
+
+  //     return (
+
+  //     )
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
 
   return (
@@ -41,6 +73,7 @@ export default function Home({ data }) {
       >
         <Heading fontSize='xl' as='h1'>CRUD App - 3rd Edition</Heading>
       </Flex>
+      <NoteForm />
       <Flex 
         align='center'
         justify='center'
@@ -68,8 +101,8 @@ export default function Home({ data }) {
             gap={2}
             pt={2}
           >
-            <Button colorScheme='gray'>Update</Button>
-            <Button colorScheme='red'>Delete</Button>
+            <Button as='a' href={`/update/${note.id}`}  colorScheme='gray'>Update</Button>
+            <Button onClick={() => deleteNote(note.id)} target='_self' colorScheme='red'>Delete</Button>
           </Flex>
           </Flex>
         ))}

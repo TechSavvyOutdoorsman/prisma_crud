@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
         <Head>
             <title>Crud App - 3rd Edition</title>
         </Head>
-        <Box p={4}>
+        <Box align='center' p={4}>
             {children}
         </Box>
         </>
