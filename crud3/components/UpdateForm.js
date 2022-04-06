@@ -48,9 +48,9 @@ const UpdateForm = ({ title, desc, id }) => {
         <FormControl as='form' onSubmit={updateNote}>
             <Stack spacing={2}>
                 <FormLabel htmlFor='text'>Title</FormLabel>
-                <Input placeholder={`${title}`} id='title' type='text' onChange={e => setFormTitle(e.target.value)} />
+                <Input placeholder={`${title}...`} id='title' type='text' onChange={e => setFormTitle(e.target.value)} />
                 {/* <FormLabel htmlFor='text'>Description</FormLabel> */}
-                {/* <Textarea placeholder={`${desc}`} onChange={e => setFormDescription(e.target.value)}  /> */}
+                {/* <Textarea placeholder={`${desc}...`} onChange={e => setFormDescription(e.target.value)}  /> */}
                 <Button type='submit' colorScheme='teal'>Update Note</Button>
 
             </Stack>

@@ -13,6 +13,7 @@ export default async function handle(req, res){
             }
         })
         res.json(updatedNote)
+
     } else { 
         throw new Error (
             `The HTTP ${req.method} method is not supported at this route.`
